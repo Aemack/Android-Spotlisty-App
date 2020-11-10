@@ -6,7 +6,7 @@
     android:layout_width="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlist_recycler_view"
+        android:id="@+id/genres_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         card_view:layout_constraintBottom_toTopOf="@id/include"
@@ -22,5 +22,5 @@
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toBottomOf="@id/playlist_recycler_view" />
+        card_view:layout_constraintTop_toBottomOf="@id/genres_recycler_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

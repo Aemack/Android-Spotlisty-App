@@ -40,6 +40,22 @@
             android:name=".SavePlaylistActivity"
             android:label="SavePlaylistActivity">
         </activity>
+
+        <activity
+            android:name=".GenresActivity"
+            android:label="GenresActivity">
+        </activity>
+
+        <activity
+            android:name=".GeneratedFromGenreActivity"
+            android:label="GeneratedFromGenreActivity">
+        </activity>
+
+        <activity
+            android:name=".GenerateFromRecentActivity"
+            android:label="GenerateFromRecentActivity">
+        </activity>
+
     </application>
 
 </manifest>

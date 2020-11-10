@@ -30,6 +30,9 @@ public class PlaylistTracksActivity extends Activity {
     private String trackIds;
 
     private Button userPlaylistsBtn;
+    private Button genresBtn;
+    private Button generateBtn;
+
     private Button generateButton;
 
     @Override
@@ -41,6 +44,22 @@ public class PlaylistTracksActivity extends Activity {
         userPlaylistsBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(PlaylistTracksActivity.this, PlaylistsActivity.class));
+            }
+        });
+
+        generateBtn = (Button) findViewById(R.id.generate_button);
+        generateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PlaylistTracksActivity.this, GenerateFromRecentActivity.class));
+            }
+        });
+
+        genresBtn = (Button) findViewById(R.id.genres_button);
+        genresBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PlaylistTracksActivity.this, GenresActivity.class));
             }
         });
 

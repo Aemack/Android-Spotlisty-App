@@ -3,7 +3,6 @@ package com.devmc.spotlisty;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.devmc.spotlisty.Connectors.SavePlaylistService;
 import com.devmc.spotlisty.Connectors.UserPlaylistService;
-import com.devmc.spotlisty.Connectors.UserService;
 import com.devmc.spotlisty.Model.Playlist;
 
 import java.util.ArrayList;
@@ -26,7 +24,11 @@ public class SavePlaylistActivity extends Activity {
 
     private UserPlaylistService userPlaylistService;
     private ArrayList<Playlist> userPlaylists;
+
     private Button userPlaylistsBtn;
+    private Button genresBtn;
+    private Button generateBtn;
+
     private String trackUris;
     private String playlistName;
 
@@ -35,10 +37,27 @@ public class SavePlaylistActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_playlists);
-        recyclerView = (RecyclerView) findViewById(R.id.playlist_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.genres_recycler_view);
         userPlaylistService = new UserPlaylistService(getApplicationContext());
 
         savePlaylistService = new SavePlaylistService(getApplicationContext());
+
+
+        generateBtn = (Button) findViewById(R.id.generate_button);
+        generateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SavePlaylistActivity.this, GenerateFromRecentActivity.class));
+            }
+        });
+
+        genresBtn = (Button) findViewById(R.id.genres_button);
+        genresBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SavePlaylistActivity.this, GenresActivity.class));
+            }
+        });
 
         userPlaylistsBtn = (Button) findViewById(R.id.your_playlist_button);
         userPlaylistsBtn.setOnClickListener(new View.OnClickListener(){

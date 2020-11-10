@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.devmc.spotlisty.Connectors.GenerateFromRecentService;
 import com.devmc.spotlisty.Connectors.GenerateFromTracksService;
 import com.devmc.spotlisty.Connectors.PlaylistTracksService;
 import com.devmc.spotlisty.Model.Song;
@@ -19,11 +20,11 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GeneratedFromPlaylistActivity extends Activity {
+public class GenerateFromRecentActivity extends Activity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private GenerateFromTracksService generateFromTracksService;
+    private GenerateFromRecentService generateFromRecentService;
     private Song song;
     private ArrayList<Song> tracks;
     private String trackIds;
@@ -43,16 +44,11 @@ public class GeneratedFromPlaylistActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generated_from_playlist);
-        recyclerView = findViewById(R.id.generated_from_playlist_recycler);
-
-        Bundle extras = getIntent().getExtras();
-        if(extras !=null) {
-            trackIds = extras.getString("trackIds");
-        }
+        setContentView(R.layout.generated_from_recent_activity);
+        recyclerView = findViewById(R.id.generated_from_recent_recycler);
 
 
-        generateFromTracksService = new GenerateFromTracksService(getApplicationContext());
+        generateFromRecentService = new GenerateFromRecentService(getApplicationContext());
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
@@ -63,19 +59,18 @@ public class GeneratedFromPlaylistActivity extends Activity {
         getTracks();
 
 
-        regenerateButton = findViewById(R.id.regenerate_playlist_from_playlist_button);
+        regenerateButton = findViewById(R.id.regenerate_playlist_from_recent_button);
         regenerateButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 trackIds = getTrackIds();
-                Intent i = new Intent(v.getContext(), GeneratedFromPlaylistActivity.class);
-                i.putExtra("trackIds",trackIds);
+                Intent i = new Intent(v.getContext(), GenerateFromRecentActivity.class);
 
                 startActivity(i);
             }
         });
 
-        editPlaylistName = findViewById(R.id.editPlaylistTitle);
-        saveButton = findViewById(R.id.save_playlist_from_playlist_button);
+        editPlaylistName = findViewById(R.id.editRecentPlaylistTitle);
+        saveButton = findViewById(R.id.save_playlist_from_recent_button);
         saveButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 String playlistName = editPlaylistName.getText().toString();
@@ -94,7 +89,7 @@ public class GeneratedFromPlaylistActivity extends Activity {
         generateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GeneratedFromPlaylistActivity.this, GenerateFromRecentActivity.class));
+                startActivity(new Intent(GenerateFromRecentActivity.this, GenerateFromRecentActivity.class));
             }
         });
 
@@ -102,14 +97,14 @@ public class GeneratedFromPlaylistActivity extends Activity {
         genresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GeneratedFromPlaylistActivity.this, GenresActivity.class));
+                startActivity(new Intent(GenerateFromRecentActivity.this, GenresActivity.class));
             }
         });
 
         userPlaylistsBtn = (Button) findViewById(R.id.your_playlist_button);
         userPlaylistsBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(GeneratedFromPlaylistActivity.this, PlaylistsActivity.class));
+                startActivity(new Intent(GenerateFromRecentActivity.this, PlaylistsActivity.class));
             }
         });
     }
@@ -118,29 +113,27 @@ public class GeneratedFromPlaylistActivity extends Activity {
     private String getAllTrackUris(){
         String uriString = "";
         int iter = 0;
-         for (Song track : tracks) {
-             if (iter == 0){
-                 //spotify:track:4iEOVEULZRvmzYSZY2ViKN
-                 uriString = "spotify:track:"+track.getId();
-             } else {
-                 uriString =uriString+",spotify:track:"+track.getId();
-             }
-             iter ++;
-         }
+        for (Song track : tracks) {
+            if (iter == 0){
+                //spotify:track:4iEOVEULZRvmzYSZY2ViKN
+                uriString = "spotify:track:"+track.getId();
+            } else {
+                uriString =uriString+",spotify:track:"+track.getId();
+            }
+            iter ++;
+        }
 
         return uriString;
     }
 
     //Get tracks from playlistTracksService
     private void getTracks(){
-
-        generateFromTracksService.setTrackIds(trackIds);
-
-        generateFromTracksService.getTracks(() -> {
-            tracks = generateFromTracksService.getTracks();
-
-            //Call to update playlists
-            updateTracks();
+        generateFromRecentService.setRecentlyPlayed(() -> {
+            tracks = generateFromRecentService.generateTracks(()->{
+                Log.i("TRACKS>>>>>>>",""+tracks);
+                //Call to update playlists
+                updateTracks();
+            });
         });
     }
 

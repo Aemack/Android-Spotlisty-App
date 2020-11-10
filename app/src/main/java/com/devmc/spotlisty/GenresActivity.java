@@ -3,43 +3,46 @@ package com.devmc.spotlisty;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.devmc.spotlisty.Connectors.UserPlaylistService;
-import com.devmc.spotlisty.Model.Playlist;
+import com.devmc.spotlisty.Connectors.GenresService;
+import com.devmc.spotlisty.Model.Genre;
 
 import java.util.ArrayList;
 
-public class PlaylistsActivity extends Activity {
+//TODO:CHANGE IMAGES TO LETTERS OR SOMETHING
+
+public class GenresActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Genre> genreSeeds;
 
-    private UserPlaylistService userPlaylistService;
-    private ArrayList<Playlist> userPlaylists;
-
-    //Nav Buttons
     private Button userPlaylistsBtn;
     private Button genresBtn;
     private Button generateBtn;
 
+    private GenresService genresService;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_playlists);
+        setContentView(R.layout.genres_activity);
         recyclerView = (RecyclerView) findViewById(R.id.genres_recycler_view);
-        userPlaylistService = new UserPlaylistService(getApplicationContext());
+
+        genresService = new GenresService(getApplicationContext());
 
         generateBtn = (Button) findViewById(R.id.generate_button);
         generateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PlaylistsActivity.this, GenerateFromRecentActivity.class));
+                startActivity(new Intent(GenresActivity.this, GenerateFromRecentActivity.class));
             }
         });
 
@@ -47,43 +50,42 @@ public class PlaylistsActivity extends Activity {
         genresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PlaylistsActivity.this, GenresActivity.class));
+                startActivity(new Intent(GenresActivity.this, GenresActivity.class));
             }
         });
 
         userPlaylistsBtn = (Button) findViewById(R.id.your_playlist_button);
         userPlaylistsBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(PlaylistsActivity.this, PlaylistsActivity.class));
+                startActivity(new Intent(GenresActivity.this, PlaylistsActivity.class));
             }
         });
 
 
         recyclerView.setHasFixedSize(true);
+
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         //Call to get playlists
-        getPlaylists();
+        getGenres();
     }
 
-    //Get playlists from userPlaylistService
-    private void getPlaylists(){
-        userPlaylistService.getUserPlaylists(() -> {
-            userPlaylists = userPlaylistService.getUserPlaylists();
+    public void getGenres(){
 
-            //Call to update playlists
-            updatePlaylists();
+        genresService.getGenreSeeds(() -> {
+           genreSeeds = genresService.getGenreSeeds();
+
+
+           updateList();
         });
     }
 
-    private void updatePlaylists(){
-        // Creates adapter, passing in user playlists
-        mAdapter = new PlaylistAdapter(userPlaylists);
-
-
-
+    public void updateList(){
+        mAdapter = new GenresAdapter(genreSeeds);
         // Sets adapter on recycle view
         recyclerView.setAdapter(mAdapter);
     }
+
 }
