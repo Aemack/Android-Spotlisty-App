@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private TextView userView;
-    private TextView songView;
+    private TextView userNameView;
     private Button userPlaylistsBtn;
     private Button genresBtn;
     private Button generateBtn;
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userView = (TextView) findViewById(R.id.user);
+        userNameView = (TextView) findViewById(R.id.welcome_name);
 
 
         //Nav Buttons
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("SPOTIFY",0);
         userView.setText(sharedPreferences.getString("userid","No User"));
-
+        userNameView.setText(sharedPreferences.getString("display_name",""));
 
     }
 }

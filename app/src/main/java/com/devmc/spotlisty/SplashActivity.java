@@ -92,6 +92,7 @@ public class SplashActivity extends AppCompatActivity {
             User user = userService.getUser();
             editor = getSharedPreferences("SPOTIFY", 0).edit();
             editor.putString("userid",user.id);
+            editor.putString("display_name", user.display_name);
             Log.d("STARTING", "GOT USER INFORMATION");
 
             // We use commit instead of apply because we don't need the infomration stored immediatley

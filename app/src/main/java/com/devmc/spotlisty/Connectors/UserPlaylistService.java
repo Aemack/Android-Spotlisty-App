@@ -38,7 +38,7 @@ public class UserPlaylistService {
     }
 
     public ArrayList<Playlist> getUserPlaylists(final VolleyCallBack callBack){
-        String endpoint = "https://api.spotify.com/v1/me/playlists";
+        String endpoint = "https://api.spotify.com/v1/me/playlists?limit=50";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, endpoint, null, response -> {
             Gson gson = new Gson();
             JSONArray jsonArray = response.optJSONArray("items");

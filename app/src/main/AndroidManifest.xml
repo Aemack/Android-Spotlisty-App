@@ -19,42 +19,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:label="SpotListy"></activity>
 
         <activity
             android:name=".PlaylistsActivity"
-            android:label="PlaylistsActivity">
+            android:label="Your Playlists">
         </activity>
 
         <activity
             android:name=".PlaylistTracksActivity"
-            android:label="PlaylistTracksActivity">
+            android:label="Playlist Tracks">
         </activity>
 
         <activity
             android:name=".GeneratedFromPlaylistActivity"
-            android:label="GeneratedFromPlaylistActivity">
+            android:label="Generated From Playlist">
         </activity>
 
         <activity
             android:name=".SavePlaylistActivity"
-            android:label="SavePlaylistActivity">
+            android:label="Playlist Saved">
         </activity>
 
         <activity
             android:name=".GenresActivity"
-            android:label="GenresActivity">
+            android:label="Genres">
         </activity>
 
         <activity
             android:name=".GeneratedFromGenreActivity"
-            android:label="GeneratedFromGenreActivity">
+            android:label="Generated From Genre">
         </activity>
 
         <activity
             android:name=".GenerateFromRecentActivity"
-            android:label="GenerateFromRecentActivity">
+            android:label="Generated">
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

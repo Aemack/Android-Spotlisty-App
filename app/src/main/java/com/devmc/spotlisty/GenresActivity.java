@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 //TODO:CHANGE IMAGES TO LETTERS OR SOMETHING
 
-public class GenresActivity extends Activity {
+public class GenresActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;

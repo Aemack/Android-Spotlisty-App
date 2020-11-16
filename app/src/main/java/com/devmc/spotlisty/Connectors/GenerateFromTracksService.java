@@ -44,7 +44,7 @@ public class GenerateFromTracksService {
     }
 
     public ArrayList<Song> getTracks(final VolleyCallBack callBack){
-        String endpoint = "https://api.spotify.com/v1/recommendations?seed_tracks="+trackIds;
+        String endpoint = "https://api.spotify.com/v1/recommendations?limit=100&seed_tracks="+trackIds;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, endpoint, null, response -> {
             Gson gson = new Gson();
             JSONArray jsonArray = response.optJSONArray("tracks");

@@ -20,6 +20,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
@@ -30,7 +31,8 @@ android {
 
 dependencies {
 
-    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.spotify.android:auth:1.1.0'
@@ -38,7 +40,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation "com.google.code.gson:gson:2.8.5"
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.navigation:navigation-fragment:2.3.1'
     implementation 'androidx.navigation:navigation-ui:2.3.1'

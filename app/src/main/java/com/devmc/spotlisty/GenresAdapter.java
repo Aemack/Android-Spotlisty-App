@@ -42,14 +42,14 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.MyViewHold
 
         //Get Element from dataset at this psoition and
         // replace contents with that element
-        String imageUri = "https://icons-for-free.com/iconfiles/png/512/music-131964784909142833.png";
+        /*String imageUri = "https://icons-for-free.com/iconfiles/png/512/music-131964784909142833.png";
         ImageView ivBasicImage = holder.genreImage;
         Picasso.get().load(imageUri).into(ivBasicImage);
+        */
         holder.genreName.setText(mDataset.get(position).getName());
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Toast.makeText(view.getContext(), "Genre Clicked = "+mDataset.get(position).getName(), Toast.LENGTH_SHORT).show();
                 i = new Intent(view.getContext(), GeneratedFromGenreActivity.class);
                 i.putExtra("genreSeed",mDataset.get(position).getName());
                 view.getContext().startActivity(i);
@@ -67,12 +67,12 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.MyViewHold
         // each data item is just a string in this case
         public TextView genreName;
         public ConstraintLayout parentLayout;
-        public ImageView genreImage;
+        //public ImageView genreImage;
 
         public MyViewHolder(View v) {
             super(v);
             genreName = v.findViewById(R.id.genre_name);
-            genreImage = v.findViewById(R.id.genre_image);
+            //genreImage = v.findViewById(R.id.genre_image);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
 

@@ -127,14 +127,11 @@ public class GeneratedFromGenreActivity extends Activity {
 
     //Get tracks from playlistTracksService
     private void getTracks(){
-        Log.i("GENRE SEED = ", genreSeed+"");
-
         generateFromGenresService.setGenreSeed(genreSeed);
 
         generateFromGenresService.getTracks(() -> {
             tracks = generateFromGenresService.getTracks();
 
-            Log.i("TRACKS OVER ERE >>>>>",tracks+"");
             //Call to update playlists
             updateTracks();
         });

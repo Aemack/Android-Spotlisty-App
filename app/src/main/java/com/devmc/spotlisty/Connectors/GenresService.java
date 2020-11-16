@@ -45,7 +45,6 @@ public class GenresService {
             for (int iter = 0; iter < jsonArray.length(); iter++) {
                 try {
                     seedString = jsonArray.get(iter).toString();
-                    Log.i("SEED STRING >>>>>>>>>",seedString);
                     Genre genre = new Genre(seedString);
                     genreSeeds.add(genre);
                 } catch (JSONException e){

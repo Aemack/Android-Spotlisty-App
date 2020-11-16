@@ -8,4 +8,8 @@ public class User {
     public String email;
     public String id;
 
+    public void setDisplay_name(String display_name){
+        this.display_name = display_name;
+    }
+
 }
